@@ -1,0 +1,42 @@
+.typing-text {
+  border-right: 2px solid #fff;
+  white-space: pre-wrap;
+  overflow: hidden;
+  display: inline-block;
+  min-height: 4em;
+}
+
+/* Efek bunga bermekaran */
+.flower {
+  position: fixed;
+  top: -50px;
+  pointer-events: none;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+  z-index: 5;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.floating {
+  max-width: 300px;  /* maksimal lebar 300px */
+  width: 80%;        /* lebar 80% dari container */
+  height: auto;      /* tinggi mengikuti aspek rasio */
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
+  animation: floatUpDown 3s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+}
+

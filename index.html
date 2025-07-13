@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday Sayang</title>
+<link href="https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Jersey+15&family=Luckiest+Guy&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    font-family: 'gideon+roman', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+  }
+  #login-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  #login-screen input {
+    padding: 12px;
+    font-size: 16px;
+    margin: 8px;
+    border: none;
+    border-radius: 10px;
+    width: 220px;
+    text-align: center;
+  }
+  #login-screen input[readonly] {
+    background: #ffc0cb88;
+    font-weight: bold;
+    cursor: not-allowed;
+  }
+  .slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: fadeIn 1s ease;
+    max-width: 700px;
+    width: 90vw;
+  }
+  .slide.active {
+    display: flex;
+  }
+  button {
+    margin-top: 15px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 40px;
+    background: #ff007a;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255,0,122,0.5);
+    transition: 0.3s;
+  }
+  button:hover {
+    background: #ff4da6;
+    transform: scale(1.05);
+  }
+  .floating {
+    width: 280px;
+    max-width: 90vw;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 12px 5px rgba(255, 105, 180, 0.8);
+    animation: float 4s ease-in-out infinite;
+    margin: 10px 15px;
+  }
+  .photo-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .typing-text {
+    font-size: 22px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    margin-top: 18px;
+    border-right: 2px solid #fff;
+    display: inline-block;
+    max-width: 100%;
+  }
+  .love-drop {
+    position: fixed;
+    top: -30px;
+    pointer-events: none;
+    font-size: 24px;
+    animation: fallLove linear infinite;
+    opacity: 0.8;
+    z-index: 5;
+  }
+  @keyframes fallLove {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+  #secret-envelope {
+    display: none;
+    font-size: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+    animation: float 3s ease-in-out infinite;
+    user-select: none;
+  }
+  #secret-message {
+    display: none;
+    margin-top: 20px;
+    max-width: 700px;
+    width: 90vw;
+    color: #fff;
+    white-space: pre-wrap;
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px 5px rgba(255, 105, 180, 0.8);
+    font-size: 20px;
+    line-height: 1.6;
+    position: relative;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  #secret-message.show {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+  }
+  #secret-gift {
+    display: block;
+    margin: 15px auto 0;
+    max-width: 150px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px 3px rgba(255, 182, 193, 0.8);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div id="login-screen">
+    <h2>💖 Welcome 💖</h2>
+    <input type="text" value="iloveyou" readonly />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="checkLogin()">Login</button>
+    <p id="error-msg" style="color: yellow; margin-top: 10px;"></p>
+  </div>
+
+  <!-- Slide 1 -->
+  <div class="slide">
+    <h2>🎂 Happy Level Up, Sayangkuu 🎂</h2>
+    <div class="photo-row">
+      <img src="img/WhatsApp Image 2025-07-12 at 23.38.56_051116bb.jpg" alt="Photo 1" class="floating" style="width: 180px; max-width: 80vw;" />
+      <img src="img/WhatsApp Image 2025-07-13 at 01.14.09_4e184d88.jpg" alt="Photo 2" class="floating" style="width: 180px; max-width: 80vw;" />
+    </div>
+    <p class="typing-text" data-text="Lebih banyak kenangan,lebih banyak cinta,lebih banyak kita. 💖"></p>
+    <button onclick="nextSlide()">Start</button>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide">
+    <img src="img/WhatsApp Image 2025-07-12 at 23.38.54_a96470d0.jpg" alt="Photo" class="floating" />
+    <p class="typing-text" data-text="HAPPY BIRTHDAY SAYANG🫶🏻
+Aku harap hari ini memberimu banyak kebahagiaan dan kesenangan, aku gabisa mendeskripsikan betapa berartinya kamu bagi aku. Kamu adalah manusia terbaik yang pernah aku temuin sampe saat ini. Makasih sudah hadir dan menemaniku sepanjang perjalanan ini, semoga kita tetap bersama sampai kapanpun, makasih sudah tidak meninggalkan dan percaya sama aku selama ini. Jujur, aku ngga tau harus ngetik apa lagi🥹
+"></p>
+    <button onclick="nextSlide()">Next</button>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide">
+    <img src="img/WhatsApp Image 2025-07-12 at 23.38.55_f4275b18.jpg" alt="Photo" class="floating" />
+    <p class="typing-text" data-text="Sekali lagi selamat ulangtahun SANTI yang ke 22 tahun semoga tuhan selalu memudahkan jalanmu, melancarkan segala urusanmu, mengabulkan seluruh permintaanmu. Aminn
+Panjang umur, sehat selalu, dijauhkan dari segala penyakit dan marabahaya.
+Semoga perasaan kamu gapernah berubah sedikit pun. Tetap sabar sama aku tetap jadi orang baik,tetap kuat di tengah masalah apapun yang akan datang kedepannya!
+"></p>
+    <button onclick="nextSlide()">Next</button>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide">
+    <img src="img/WhatsApp Image 2025-07-12 at 23.38.58_c035a66a.jpg" alt="Photo" class="floating" />
+    <p class="typing-text" data-text="Semoga hubungan kita selalu diberkati,semakin kuat dan dewasa,dan tetap saling menggenggam dalam suka dan duka."></p>
+    <button onclick="nextSlide()">Next</button>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide">
+    <img src="img/WhatsApp Image 2025-07-12 at 23.38.58_d635936d.jpg" alt="Photo" class="floating" />
+    <p class="typing-text" data-text="Jangan pernah lelah mencintaiku,karena aku akan selalu mencintaimu tanpa batas.Kamu adalah rumah terindahku."></p>
+    <button onclick="nextSlide()">Next</button>
+  </div>
+
+  <!-- Slide 6 -->
+  <div class="slide">
+    <img src="img/WhatsApp Image 2025-07-13 at 01.14.07_74ae0317.jpg" alt="Photo" class="floating" />
+    <p class="typing-text" data-text="Denganmu aku belajar arti kesabaran,arti menerima dan arti mencintai tanpa syarat."></p>
+    <button onclick="nextSlide()">Next</button>
+  </div>
+
+  <!-- Slide 7 -->
+  <div class="slide">
+    <img src="img/WhatsApp Image 2025-07-13 at 01.14.08_03da7329.jpg" alt="Photo" class="floating" />
+    <p class="typing-text" data-text="Aku berjanji akan selalu menjadi tempatmu pulang,sandaran saat lelah,npelipur lara saat sedih,selalu."></p>
+    <button onclick="nextSlide()">Next</button>
+  </div>
+
+  <!-- Slide 8 -->
+  <div class="slide">
+    <img src="img/WhatsApp Image 2025-07-13 at 02.26.19_0d75ce3f.jpg" alt="Photo" class="floating" />
+    <p class="typing-text" data-text="I LOVE SO MUCH and MORE🥰 SEE U di waktu yang tepat!😍🫶🏻
+Mungkin aku bukan lelaki pertama yang membuat kamu bahagia.
+But, i will be the boy who gives u the love dserve. The boy who makes u feel the luckiest guy✨"></p>
+    <button onclick="nextSlide()">Next</button>
+  </div>
+
+  <!-- Slide 9 - End -->
+  <div class="slide">
+    <h2>🎉 The End 🎉</h2>
+    <p class="typing-text" data-text="Selamat ulang tahun, sayangku! 🎂❤️Selamanya milikmu. 💕"></p>
+    <div id="secret-envelope" title="Klik untuk membuka pesan rahasia">✉️</div>
+    <div id="secret-message">
+      <!-- Pesan rahasia muncul di sini -->
+    </div>
+  </div>
+
+  <audio id="bgMusic" src="bucin.mp3" type="audio/mpeg" autoplay loop></audio>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+
+  function checkLogin() {
+    const pass = document.getElementById("password").value.trim();
+    const validPass = "iloveyouto";
+    if (pass === validPass) {
+      document.getElementById("login-screen").style.display = "none";
+      slides[current].classList.add("active");
+      startTyping(slides[current]);
+      createLoveDrops();
+      document.getElementById("bgMusic").play().catch(() => {});
+    } else {
+      document.getElementById("error-msg").textContent = "Password salah 😢 coba lagi ya~";
+    }
+  }
+
+  function nextSlide() {
+    slides[current].classList.remove("active");
+    current++;
+    if (current < slides.length) {
+      slides[current].classList.add("active");
+      startTyping(slides[current]);
+      if (current === slides.length - 1) {
+        document.getElementById("secret-envelope").style.display = "block";
+      }
+    }
+  }
+
+  function startTyping(slide) {
+    const typingElement = slide.querySelector(".typing-text");
+    if (!typingElement) return;
+    const text = typingElement.getAttribute("data-text");
+    typingElement.textContent = "";
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 30);
+  }
+
+  function createLoveDrops() {
+    const loveEmojis = ['❤️', '💖', '💗', '💕', '💞'];
+    const count = 30;
+    for (let i = 0; i < count; i++) {
+      const love = document.createElement('div');
+      love.classList.add('love-drop');
+      love.textContent = loveEmojis[Math.floor(Math.random() * loveEmojis.length)];
+      love.style.left = Math.random() * 100 + 'vw';
+      love.style.fontSize = (16 + Math.random() * 20) + 'px';
+      love.style.animationDuration = (6 + Math.random() * 5) + 's';
+      love.style.animationDelay = (Math.random() * 10) + 's';
+      document.body.appendChild(love);
+    }
+  }
+
+  function showSecret() {
+    const secret = document.getElementById("secret-message");
+    secret.innerHTML = `
+      Jika kamu membaca ini,<br><br>
+      berarti kamu sudah sampai di akhir kejutan kecilku...<br><br>
+      Tapi yang sebenarnya,<br>
+      cintaku padamu tak akan pernah berakhir.<br><br>
+      Terima kasih sudah selalu ada —<br>
+      melewati kekacauan, keheningan, dan hari-hari terburukku.<br><br>
+      Kamu bukan hanya seseorang yang aku cintai,<br>
+      kamu adalah bagian jiwaku yang selama ini hilang.<br><br>
+      Dan tidak peduli ke mana hidup membawa kita,<br>
+      aku akan selalu kembali kepadamu.<br><br>
+      Selamanya milikmu,<br>
+      yang mencintaimu lebih dari kata-kata.<br><br>
+      <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWNxaWVpdDNhczBocWxlYmRjbTlvdTlyZG5neGJsdXVsNjVuMGhxMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WP1Z0FfnuMuXqPvDlj/giphy.gif" alt="Love Gif" id="secret-gift" />
+    `;
+    secret.classList.add("show");
+    document.getElementById("secret-envelope").style.display = "none";
+    window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+  }
+
+  document.getElementById("secret-envelope").addEventListener("click", showSecret);
+
+  document.getElementById("password").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+      checkLogin();
+    }
+  });
+</script>
+
+</body>
+</html>
